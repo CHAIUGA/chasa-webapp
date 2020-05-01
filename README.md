@@ -1,3 +1,3 @@
-#The CHASA Web App
+# The CHASA Web App
 ```
 ![](chasa.gif)
