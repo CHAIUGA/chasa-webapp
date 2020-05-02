@@ -1,10 +1,10 @@
 # The CHASA Web App
 ![](chasa.gif)
 ## Introduction
-The webapp is used to predict cases of disease incideinces in Uganda based on the weather parameters. It uses the [CHASA prediction model](https://github.com/CHAIUGA/chasa-model) to make the predictions and display the results as graphs/Charts.
+The webapp is used by an end user to predict cases of disease incideinces in Uganda based on the weather parameters. It uses the [CHASA prediction model](https://github.com/CHAIUGA/chasa-model) to make the predictions and display the results as graphs/Charts.
 
-## Prerequisities
-You need to have **node** installed on your computer
+## Pre-requisities
+You need to have **Node** installed on your computer
 
 ## Set up
 * Download/Pull the files to your computer
