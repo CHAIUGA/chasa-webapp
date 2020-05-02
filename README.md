@@ -32,4 +32,8 @@ yarn build
 ```
 npm start
 ```
+* Access your application in your browser
+```
+localhost:3000
+```
 **Note** The application depends on [CHASA prediction model](https://github.com/CHAIUGA/chasa-model) to get results
