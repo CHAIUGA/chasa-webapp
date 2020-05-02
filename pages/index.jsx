@@ -186,7 +186,6 @@ const MyVerticallyCenteredModal = ({
             })
               .then(res => res.json())
               .then(data => {
-                console.log(data);
                 handleResults(data.predictions);
                 handleUserData(data.req_data);
                 onHide();
@@ -414,9 +413,6 @@ export default function Home() {
   const [modalShow, setModalShow] = React.useState(false);
   const [predictions, setPredictions] = React.useState([]);
   const [userData, setUserData] = React.useState({});
-
-  console.log(predictions);
-  console.log(userData);
 
   return (
     <Layout>
