@@ -10,9 +10,9 @@ const Navigations = ({ title = "CHASA" }) => (
     <Link href="/">
       <a style={linkStyle}> Predict Disease Incidences </a>
     </Link>
-    <Link href="/parameters">
+    {/* <Link href="/parameters">
       <a style={linkStyle}> Parameters List </a>
-    </Link>
+    </Link> */}
   </div>
 );
 

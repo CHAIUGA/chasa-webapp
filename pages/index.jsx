@@ -138,42 +138,18 @@ const MyVerticallyCenteredModal = ({
       <Modal.Body>
         <Formik
           initialValues={{
-            minWindSpeed: "",
-            windGust: "",
-            minTemp: "",
-            maxTemp: "",
-            meanTemp: "",
-            humidity: "",
-            sun: "",
-            rain: "",
-            pressure: "",
             diseases: [],
-            location: "",
-            located: "",
-            month: ""
+            user_located: "",
+            user_month: ""
           }}
           validationSchema={Yup.object({
-            minWindSpeed: Yup.number().required("Required"),
-            windGust: Yup.number().required("Required"),
-            minTemp: Yup.number().required("Required"),
-            maxTemp: Yup.number().required("Required"),
-            meanTemp: Yup.number().required("Required"),
-            humidity: Yup.number().required("Required"),
-            sun: Yup.number().required("Required"),
-            rain: Yup.number().required("Required"),
-            pressure: Yup.number().required("Required"),
             diseases: Yup.array()
               .of(Yup.string())
               .required("Atleast one disease required"),
-            location: Yup.number().required("Required"),
-            month: Yup.string().required("Required")
+            user_located: Yup.string().required("Required"),
+            user_month: Yup.string().required("Required")
           })}
           onSubmit={(values, { setSubmitting }) => {
-            const filtered = locationOptions.filter(
-              entry => entry.id == values.location
-            );
-            values.located = filtered[0].name;
-            values.location = Number(values.location);
             setSubmitting(true);
 
             fetch(`/predict_disease_incident`, {
@@ -202,21 +178,33 @@ const MyVerticallyCenteredModal = ({
                 <Col xs={6} md={6} style={{ marginBottom: "10px" }}>
                   <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>District</Form.Label>
-                    <Field as="select" name="location" className="form-control">
+                    <Field
+                      as="select"
+                      name="user_located"
+                      className="form-control"
+                    >
                       <option value="">---District---</option>
                       {locationOptions.map((val, index) => (
-                        <option key={index} value={val.id}>
+                        <option key={index} value={val.name}>
                           {val.name}
                         </option>
                       ))}
                     </Field>
+                    <ErrorMessage
+                      name="user_located"
+                      render={msg => <div className="error">{msg}</div>}
+                    />
                   </Form.Group>
                 </Col>
                 {/* Month */}
                 <Col xs={6} md={6} style={{ marginBottom: "10px" }}>
                   <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Month</Form.Label>
-                    <Field as="select" name="month" className="form-control">
+                    <Field
+                      as="select"
+                      name="user_month"
+                      className="form-control"
+                    >
                       <option value="">---Month---</option>
                       {monthOptions.map((val, index) => (
                         <option key={index} value={val.name}>
@@ -224,125 +212,8 @@ const MyVerticallyCenteredModal = ({
                         </option>
                       ))}
                     </Field>
-                  </Form.Group>
-                </Col>
-              </Row>
-
-              <Row className="show-grid">
-                {/* weather */}
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="pressure"
-                      placeholder="Pressure"
-                      className="form-control"
-                    />
                     <ErrorMessage
-                      name="pressure"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="rain"
-                      placeholder="Rain"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="rain"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="sun"
-                      placeholder="Sun"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="sun"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="humidity"
-                      placeholder="Humidity"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="humidity"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="meanTemp"
-                      placeholder="Mean Temperature"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="meanTemp"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="maxTemp"
-                      placeholder="Max. Temperature"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="maxTemp"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="minTemp"
-                      placeholder="Min. Temperature"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="minTemp"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="windGust"
-                      placeholder="Wind Gust"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="windGust"
-                      render={msg => <div className="error">{msg}</div>}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={3} md={3} style={{ marginBottom: "5px" }}>
-                  <Form.Group>
-                    <Field
-                      name="minWindSpeed"
-                      placeholder="Min. Wind Speed"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="minWindSpeed"
+                      name="user_month"
                       render={msg => <div className="error">{msg}</div>}
                     />
                   </Form.Group>
@@ -381,7 +252,9 @@ const MyVerticallyCenteredModal = ({
                   type="submit"
                   className={"btn-primary"}
                   disabled={
-                    isEmpty(errors) && values.location != "" && !isSubmitting
+                    isEmpty(errors) &&
+                    values.user_located != "" &&
+                    !isSubmitting
                       ? false
                       : true
                   }
@@ -430,17 +303,17 @@ export default function Home() {
                   }}
                 >
                   <div className="col-md-6">
-                    <div>Pressure: {userData.pressure}</div>
-                    <div>Humidity: {userData.humidity}</div>
-                    <div>Min. Wind Speed: {userData.minWindSpeed}</div>
-                    <div>Rain: {userData.rain}</div>
-                    <div>Sun: {userData.sun}</div>
-                    <div>Wind Gust: {userData.windGust}</div>
+                    <div>Pressure: {predictions[0].preasure}</div>
+                    <div>Humidity: {predictions[0].humidity}</div>
+                    <div>Mean Wind Speed: {predictions[0].mean_wind_spd}</div>
+                    <div>Rain: {predictions[0].rain}</div>
+                    <div>Sun: {predictions[0].sun}</div>
+                    <div>Wind Gust: {predictions[0].wind_gust}</div>
                   </div>
                   <div className="col-md-6">
-                    <div>Max Temperature: {userData.maxTemp}</div>
-                    <div>Mean Temperature: {userData.meanTemp}</div>
-                    <div>Min. Temperature: {userData.minTemp}</div>
+                    <div>Max Temperature: {predictions[0].max_temp}</div>
+                    <div>Mean Temperature: {predictions[0].mean_temp}</div>
+                    <div>Min. Temperature: {predictions[0].min_temp}</div>
                   </div>
                 </div>
                 <div
@@ -450,8 +323,8 @@ export default function Home() {
                     marginRight: "120px"
                   }}
                 >
-                  <h1>{userData.located}</h1>
-                  <h4>{userData.month}</h4>
+                  <h1>{userData.user_located}</h1>
+                  <h4>{userData.user_month}</h4>
                   <div className="center">
                     <Button
                       size="sm"
@@ -538,7 +411,7 @@ export default function Home() {
 
       <style jsx>{`
         .selectButton {
-          margin: 150px 10px;
+          margin: 120px 10px;
         }
         .subTitle {
           line-height: 1.5;
